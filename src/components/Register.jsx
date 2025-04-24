@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Input } from './Input'
+import { useRegister } from '../shared/hooks/useRegister'
 
 
 //Formularios no controlado
@@ -38,10 +39,17 @@ export const Register = () => {
         }
     }
     const [formData, setFormData] = useState(form)
+    //Importar hook personalizado
+    const { register, isLoading, error, setError } = useRegister()
+
     
     const handleRegister = (e)=>{
         e.preventDefault()
-        console.log('Estoy enviando el formulario...')
+        register(
+            formData.email.value,
+            formData.username.value,
+            formData.password.value
+        )
     }
 
     //Función manejadora de cambios del estado
@@ -96,7 +104,7 @@ export const Register = () => {
                 type='password'
                 onChangeHandler={handleValueChange}
             />      
-            <button>Enviar</button>
+            <button type='submit'>Enviar</button>
         </form>
     </div>
   )

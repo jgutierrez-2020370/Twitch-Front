@@ -10,12 +10,16 @@ export const Input = (
         type,
         showErrorMessage,
         validationMessage,
-        onBlurHandle,
+        onBlurHandler,
         textarea
     }
 ) => {
     const handleValueChange = (e)=>{
         onChangeHandler(e.target.value, field)
+    }
+
+    const handleOnBlur = (e)=>{
+        onBlurHandler(e.target.value, field)
     }
   return (
     <>
@@ -36,6 +40,7 @@ export const Input = (
                     type={type}
                     value={value}
                     onChange={handleValueChange}
+                    onBlur={handleOnBlur}
                 />
             )
         }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { registerRequest } from '../../services/api'
+import toast from 'react-hot-toast'
 
 
 //Hook personalizado para:
@@ -23,17 +24,17 @@ export const useRegister = () => {
         if(response?.err?.response?.data?.errors){
             let arrayErrors = response?.err?.response?.data?.errors
             for (const error of arrayErrors) {
-                return console.log(error.msg)
+                return toast.error(error.msg)
             }
         }
-        return console.log(
+        return toast.error(
             response?.err?.response?.data?.msg ||
             response?.err?.data?.msg ||
             'Error general al intentar registrar al usuario. Intenta de nuevo'
         )
       }
       setError(false)
-      return console.log('TODO GOOD')
+      return toast.success('TODO GOOD')
     }
   return {
     register,

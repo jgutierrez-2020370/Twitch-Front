@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Input } from './Input'
 import { useRegister } from '../shared/hooks/useRegister'
+import { emailValidationMessage, passConfirmValidationMessage, passwordValidationMessage, usernameValidationMessage, validateEmail, validatePassConfirm, validatePassword, validateUsername } from '../shared/validators/validator'
 
 
 //Formularios no controlado
@@ -42,6 +43,12 @@ export const Register = () => {
     //Importar hook personalizado
     const { register, isLoading, error, setError } = useRegister()
 
+    //Validador para el botón
+    const isSubmitButtonDisable =   !formData.email.isValid ||
+                                    !formData.username.isValid ||
+                                    !formData.password.isValid ||
+                                    !formData.passwordConfirm.isValid
+
     
     const handleRegister = (e)=>{
         e.preventDefault()
@@ -50,6 +57,37 @@ export const Register = () => {
             formData.username.value,
             formData.password.value
         )
+    }
+
+    //función específica para validar campos
+    const handleValidationOnBlur = (value, field)=>{
+        let isValid = false
+        switch (field) {
+            case 'email':
+                isValid = validateEmail(value)
+                break;
+            case 'username':
+                isValid = validateUsername(value)
+                break;
+            case 'password':
+                isValid = validatePassword(value)
+                break;
+            case 'passwordConfirm':
+                isValid = validatePassConfirm(formData.password.value, value)
+                break;
+            default:
+                break;
+        }
+        setFormData((prevData)=> (
+            {
+                ...prevData,
+                [field]: {
+                    ...prevData[field],
+                    isValid,
+                    showError: !isValid
+                }
+            }
+        ))
     }
 
     //Función manejadora de cambios del estado
@@ -79,6 +117,9 @@ export const Register = () => {
                 value={formData.email.value}
                 type='email'
                 onChangeHandler={handleValueChange}
+                onBlurHandler={handleValidationOnBlur}
+                showErrorMessage={formData.email.showError}
+                validationMessage={emailValidationMessage}
             />
 
             <Input 
@@ -87,6 +128,9 @@ export const Register = () => {
                 value={formData.username.value}
                 type='text'
                 onChangeHandler={handleValueChange}
+                onBlurHandler={handleValidationOnBlur}
+                showErrorMessage={formData.username.showError}
+                validationMessage={usernameValidationMessage}
             />
 
             <Input 
@@ -95,6 +139,9 @@ export const Register = () => {
                 value={formData.password.value}
                 type='password'
                 onChangeHandler={handleValueChange}
+                onBlurHandler={handleValidationOnBlur}
+                showErrorMessage={formData.password.showError}
+                validationMessage={passwordValidationMessage}
             />
 
             <Input 
@@ -103,8 +150,16 @@ export const Register = () => {
                 value={formData.passwordConfirm.value}
                 type='password'
                 onChangeHandler={handleValueChange}
+                onBlurHandler={handleValidationOnBlur}
+                showErrorMessage={formData.passwordConfirm.showError}
+                validationMessage={passConfirmValidationMessage}
             />      
-            <button type='submit'>Enviar</button>
+            <button 
+                type='submit'
+                disabled={isSubmitButtonDisable}
+            >
+                Enviar
+            </button>
         </form>
     </div>
   )

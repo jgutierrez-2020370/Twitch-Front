@@ -1,5 +1,6 @@
 import { BrowserRouter, useRoutes } from 'react-router-dom'
 import { routes } from './routes.jsx'
+import { Toaster } from 'react-hot-toast'
 
 //Componente exportado por defecto
 function App() {
@@ -8,6 +9,7 @@ function App() {
   return (
     <>
       {elements}
+      <Toaster position='bottom-right' reverserOrder={false}/>
     </>
   )
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-export const DashboarContent = () => {
+export const DashboarContent = ({channels, getChannels}) => {
   return (
     <div className='content-container'>
-        <Outlet />
+        <Outlet context={{channels, getChannels}}/>
     </div>
   )
 }

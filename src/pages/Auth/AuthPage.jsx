@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
 import { Register } from '../../components/Register'
+import { Login } from '../../components/Login'
 import './AuthPage.css'
 
-//Componente exportado por Named (Quiero tener más componentes en un archivo)
+//Exportación de tipo Named
 export const AuthPage = () => {
-    const [isLogin, setIsLogin] = useState(false)
-    const handleIsLogin = ()=>{
-        setIsLogin((prev)=> !prev)
-    } 
+  const [isLogin, setIsLogin] = useState(true)
+  const handleAuthPage = ()=>{
+    setIsLogin((prev)=> !prev)
+  }
   return (
-    <div className="auth-container">
-        {
-            isLogin ? (
-                <h1>Bienvenido</h1>
-            ) : (
-                <Register />
-            )
-        }
+    <div className='auth-container'>
+      {
+        isLogin ? (
+          <Login switchAuthHandler={handleAuthPage}/>
+        ) : (
+          <Register switchAuthAndler={handleAuthPage}/>
+        )
+      }
     </div>
   )
 }

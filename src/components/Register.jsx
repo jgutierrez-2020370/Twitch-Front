@@ -15,7 +15,7 @@ import { emailValidationMessage, passConfirmValidationMessage, passwordValidatio
         useState <- formulario
     */
 
-export const Register = () => {
+export const Register = ({switchAuthAndler}) => {
 
     const form = {
         email: {
@@ -106,6 +106,7 @@ export const Register = () => {
     }
   return (
     <div className='register-container'>
+        <Logo text={"Register KinalCast"} />
         <form
             id='formulario'
             className='auth-form' 
@@ -161,6 +162,9 @@ export const Register = () => {
                 Enviar
             </button>
         </form>
+        <span onClick={switchAuthAndler} className="auth-form-switch-label">
+            ¿Ya tienes una cuenta? ¡Inicia sesión acá!
+        </span>
     </div>
   )
 }

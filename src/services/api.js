@@ -22,3 +22,14 @@ export const registerRequest = async(user)=>{
         }
     }
 }
+
+export const loginRequest = async(user)=>{
+    try{
+        return await apiClient.post('/auth/login', user)
+    }catch(err){
+        return {
+            error: true,
+            err
+        }
+    }
+}

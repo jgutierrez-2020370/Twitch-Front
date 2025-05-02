@@ -26,7 +26,7 @@ export const useLogin = () => {
         }
         const { userDetails } = response.data
         localStorage.setItem('user', JSON.stringify(userDetails))
-        navigate('/channels')
+        navigate('/dashboard/channels')
     }
 
   return {

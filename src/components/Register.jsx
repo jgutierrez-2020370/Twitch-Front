@@ -42,7 +42,7 @@ export const Register = ({switchAuthAndler}) => {
     }
     const [formData, setFormData] = useState(form)
     //Importar hook personalizado
-    const { register, isLoading, error, setError } = useRegister()
+    const { register/*, isLoading, error, setError */} = useRegister()
 
     //Validador para el botón
     const isSubmitButtonDisable =   !formData.email.isValid ||

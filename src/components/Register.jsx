@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Input } from './Input'
 import { useRegister } from '../shared/hooks/useRegister'
 import { emailValidationMessage, passConfirmValidationMessage, passwordValidationMessage, usernameValidationMessage, validateEmail, validatePassConfirm, validatePassword, validateUsername } from '../shared/validators/validator'
+import { Logo } from './Logo'
 
 
 //Formularios no controlado

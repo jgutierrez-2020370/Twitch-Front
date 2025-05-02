@@ -3,6 +3,8 @@ import toast from 'react-hot-toast'
 import { loginRequest } from "../../services/api.js";
 import { useNavigate } from "react-router-dom";
 
+//manejar la respuesta del back
+
 export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
@@ -18,7 +20,7 @@ export const useLogin = () => {
     
         if(response.error){
             return toast.error(
-                response?.e?.response?.data ||
+                response?.err?.response?.data ||
                 'Error general al intentar logearse. Intenta de nuevo.'
             )
         }

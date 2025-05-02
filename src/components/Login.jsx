@@ -11,35 +11,41 @@ import {
   
   export const Login = ({switchAuthHandler}) => {
     const { login} = useLogin()
-    const [formData, setFormData] = useState(
-      {
-        email: {
-          value: "",
-          isValid: false,
-          showError: false,
-        },
-        password: {
-          value: "",
-          isValid: false,
-          showError: false,
-        },
-      }
-    );
+    
+    const form = { 
+      email: {
+        value: "",
+        isValid: false,
+        showError: false,
+      },
+      password: {
+        value: "",
+        isValid: false,
+        showError: false,
+      },
+    }
+
+    const [formData, setFormData] = useState(form)
+
     const isSubmitButtonDisable = !formData.email.isValid ||
                                   !formData.password.isValid
   
+
+    //cuando entra al input
     const onValueChange = (value, field)=>{
       setFormData((prevData)=> (
         {
-            ...prevData,
+            ...prevData, //para que no se pierda la pass en caso que se cambie el email o viseversa
             [field]: {
-                ...prevData[field],
+                ...prevData[field], // para que no se pierdan "isValid y showError"
                 value
             }
         }
     ))
     }
-  
+
+
+    //cuando cambia de input
     const handleValidationOnBlur = (value, field)=>{
       let isValid = false
           switch(field){
@@ -64,6 +70,8 @@ import {
           ))
     }
   
+
+    //envia lo que se recibe en el from al archivo useLogin para que se valide
     const handleLogin = (e)=> {
       e.preventDefault()
           login(
@@ -71,6 +79,9 @@ import {
                   formData.password.value
           )
     }
+    
+
+    //lo que se muestra en la pantalla HTMl
     return (
       <div className="login-container">
         <Logo text={"Login KinalCast"} />

@@ -1,5 +1,8 @@
 import axios from "axios";
 
+
+//solo hacer la consulta al back
+
 //Configuración básica
 const apiClient = axios.create(
     {
